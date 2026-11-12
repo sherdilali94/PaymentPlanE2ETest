@@ -2,8 +2,7 @@
 out/
 !**/src/main/**/out/
 !**/src/test/**/out/
-!**/src/test/resources/config.properties
-#!**/test/resources/config.properties
+**/src/test/resources/config.properties
 src/test/resources/config.properties
 
 ### Eclipse ###
@@ -16,7 +15,6 @@ src/test/resources/config.properties
 .sts4-cache
 bin/
 !**/src/main/**/bin/
-!**/src/test/**/bin/
 
 ### NetBeans ###
 /nbproject/private/
