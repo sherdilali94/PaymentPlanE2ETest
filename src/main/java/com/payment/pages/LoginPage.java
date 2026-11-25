@@ -1,12 +1,11 @@
-
 package com.payment.pages;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
-public class LoginPage {
-
-    private WebDriver driver;
+public class LoginPage extends BasePage {
 
     // Locators
     private By username = By.id("user-name");
@@ -15,7 +14,7 @@ public class LoginPage {
 
     // Constructor
     public LoginPage(WebDriver driver) {
-        this.driver = driver;
+        super(driver);
     }
 
     // Open website
@@ -24,13 +23,17 @@ public class LoginPage {
     }
 
     public boolean urlVerify() {
-      return driver.getCurrentUrl().contains("inventory.html");
+        try {
+            return wait.until(ExpectedConditions.urlContains("inventory.html"));
+        } catch (TimeoutException e) {
+            return false;
+        }
     }
 
     // Login action
     public void login(String user, String pass) {
-        driver.findElement(username).sendKeys(user);
-        driver.findElement(password).sendKeys(pass);
-        driver.findElement(loginButton).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(username)).sendKeys(user);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(password)).sendKeys(pass);
+        wait.until(ExpectedConditions.elementToBeClickable(loginButton)).click();
     }
 }
